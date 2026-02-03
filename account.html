@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - Earnings Reports Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .account-section {
+            padding: 96px 0;
+            min-height: 80vh;
+        }
+        .account-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--light-gray);
+            padding: 48px;
+            border: 1px solid var(--border);
+        }
+        .account-info {
+            margin-bottom: 32px;
+        }
+        .account-info h3 {
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: var(--gray);
+        }
+        .account-info p {
+            font-size: 18px;
+            color: var(--black);
+            margin: 0;
+        }
+        .subscription-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--black);
+            color: var(--white);
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        .subscription-badge.premium {
+            background: var(--purple);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">Earnings Reports</a>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html#reports">Reports</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="#" id="logout-btn">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Account Section -->
+    <section class="account-section">
+        <div class="container">
+            <h2>My Account</h2>
+            
+            <div class="account-card">
+                <div class="account-info">
+                    <h3>Email</h3>
+                    <p id="user-email">Loading...</p>
+                </div>
+                
+                <div class="account-info">
+                    <h3>Subscription</h3>
+                    <span class="subscription-badge" id="subscription-badge">Loading...</span>
+                </div>
+                
+                <div class="account-info" id="upgrade-section" style="display: none;">
+                    <h3>Upgrade</h3>
+                    <p>Get access to all premium reports</p>
+                    <a href="index.html#pricing" class="btn btn-primary">Upgrade to Premium</a>
+                </div>
+                
+                <div class="account-info" id="manage-section" style="display: none;">
+                    <h3>Manage Subscription</h3>
+                    <p>Manage your subscription through Stripe</p>
+                    <a href="#" id="manage-subscription-btn" class="btn btn-secondary">Manage Subscription</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Earnings Reports Platform. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL_HERE';
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        async function loadAccount() {
+            const { data: { session } } = await supabase.auth.getSession();
+            
+            if (!session) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            const user = session.user;
+            document.getElementById('user-email').textContent = user.email;
+            
+            const { data: subscription } = await supabase
+                .from('user_subscriptions')
+                .select('*')
+                .eq('user_id', user.id)
+                .single();
+            
+            if (subscription) {
+                const badge = document.getElementById('subscription-badge');
+                badge.textContent = subscription.subscription_tier.toUpperCase();
+                
+                if (subscription.subscription_tier === 'free') {
+                    badge.classList.remove('premium');
+                    document.getElementById('upgrade-section').style.display = 'block';
+                } else {
+                    badge.classList.add('premium');
+                    document.getElementById('manage-section').style.display = 'block';
+                }
+            }
+        }
+        
+        document.getElementById('logout-btn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            await supabase.auth.signOut();
+            window.location.href = 'index.html';
+        });
+        
+        loadAccount();
+    </script>
+</body>
+</html>

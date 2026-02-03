@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earnings Reports Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="#home">Earnings Reports</a>
+            </div>
+            <div class="nav-menu">
+                <a href="#reports">Reports</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#" id="nav-auth">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Access Premium Earnings Call Reports</h1>
+            <p>In-depth analysis and insights from quarterly earnings calls. Free and premium reports available.</p>
+            <a href="#reports" class="btn btn-primary">View Latest Reports</a>
+        </div>
+    </section>
+
+    <!-- Reports List Section -->
+    <section id="reports" class="reports-section">
+        <div class="container">
+            <h2>Latest Earnings Reports</h2>
+            
+            <!-- Filters -->
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="Free">Free</button>
+                <button class="filter-btn" data-filter="Major">Major</button>
+            </div>
+
+            <!-- Search -->
+            <input type="text" id="search" class="search-input" placeholder="Search by company or ticker...">
+
+            <!-- Reports Table -->
+            <div class="table-container">
+                <table class="reports-table">
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Company</th>
+                            <th>Date</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Download</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reports-list">
+                        <tr>
+                            <td colspan="6" class="loading">Loading reports...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <h2>Choose Your Plan</h2>
+            <div class="pricing-grid">
+                <!-- Free Tier -->
+                <div class="pricing-card">
+                    <h3>Free Access</h3>
+                    <div class="price">$0<span>/month</span></div>
+                    <p>Access to free earnings reports</p>
+                    <ul class="features">
+                        <li>✓ All free reports</li>
+                        <li>✓ Basic search & filters</li>
+                        <li>✓ Email notifications</li>
+                        <li>✗ Premium reports</li>
+                    </ul>
+                    <button class="btn btn-secondary" id="signup-free">Sign Up Free</button>
+                </div>
+
+                <!-- Premium Tier -->
+                <div class="pricing-card featured">
+                    <div class="badge">Most Popular</div>
+                    <h3>Premium Access</h3>
+                    <div class="price">$29<span>/month</span></div>
+                    <p>Full access to all reports including major companies</p>
+                    <ul class="features">
+                        <li>✓ All free reports</li>
+                        <li>✓ All premium reports</li>
+                        <li>✓ Priority access</li>
+                        <li>✓ Early notifications</li>
+                    </ul>
+                    <button class="btn btn-primary" id="upgrade-premium">Get Premium</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3>What's included in the free tier?</h3>
+                    <p>Free tier gives you access to all earnings reports marked as "Free" in our database.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What additional reports do I get with Premium?</h3>
+                    <p>Premium members get access to all "Major" company reports, including FAANG stocks and other high-demand companies.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How quickly are reports published?</h3>
+                    <p>We aim to publish comprehensive reports within 24 hours of the earnings call completion.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can I cancel my Premium subscription anytime?</h3>
+                    <p>Yes, you can cancel anytime. You'll retain access until the end of your billing period.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            
+            <!-- Login Form -->
+            <div id="login-form" class="auth-form">
+                <h2>Login</h2>
+                <form id="login">
+                    <input type="email" id="login-email" placeholder="Email" required>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <p>Don't have an account? <a href="#" id="show-signup">Sign up</a></p>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-form" class="auth-form" style="display:none;">
+                <h2>Sign Up</h2>
+                <form id="signup">
+                    <input type="email" id="signup-email" placeholder="Email" required>
+                    <input type="password" id="signup-password" placeholder="Password (min 6 characters)" required>
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                </form>
+                <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Earnings Reports Platform. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Your App Script -->
+    <script src="app.js"></script>
+</body>
+</html>
