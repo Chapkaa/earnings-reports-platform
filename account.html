@@ -85,6 +85,11 @@
                     <h3>Manage Subscription</h3>
                     <p>Manage your subscription through Stripe</p>
                     <a href="#" id="manage-subscription-btn" class="btn btn-secondary">Manage Subscription</a>
+                    document.getElementById('manage-subscription-btn')?.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Link to Stripe customer portal (we'll set this up later)
+                    alert('Subscription management coming soon!');
+                    }); 
                 </div>
             </div>
         </div>
