@@ -224,7 +224,6 @@ async function handlePremiumUpgrade() {
     }
     
     // Redirect to Stripe checkout
-    // You'll replace this with your actual Stripe checkout URL
     const stripeCheckoutUrl = 'https://buy.stripe.com/test_bJe4gA3U21kv1HW0g00co00';
     window.location.href = `${stripeCheckoutUrl}?prefilled_email=${currentUser.email}`;
 }

@@ -145,6 +145,16 @@
             window.location.href = 'index.html';
         });
         
+        // Add event listener for manage subscription button
+        const manageBtn = document.getElementById('manage-subscription-btn');
+        if (manageBtn) {
+            manageBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('To manage your subscription, please contact support@yoursite.com or visit the Stripe customer portal.');
+                // Later you can add: window.location.href = 'YOUR_STRIPE_CUSTOMER_PORTAL_URL';
+            });
+        }
+        
         loadAccount();
     </script>
 </body>
