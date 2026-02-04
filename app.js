@@ -2,7 +2,7 @@
 // SUPABASE CONFIGURATION
 // ========================================
 // Replace with your Supabase credentials
-const SUPABASE_URL = 'https://supabase.com/dashboard/project/qfgoolfrhmfkvllfryvd';
+const SUPABASE_URL = 'https://qfgoolfrhmfkvllfryvd.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFmZ29vbGZyaG1ma3ZsbGZyeXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNTg2NTAsImV4cCI6MjA4NTYzNDY1MH0.IIsl6zGKAaBZbmKAShJZJWtAQgGiDxayPm7u7-eEkE4';
 
 // Initialize Supabase client
